@@ -18,7 +18,7 @@ jobs:
 
       # Установка 1С:Исполнитель конкретной версии
       - name: Установка 1С:Исполнитель
-        uses: otymko/setup-executor@main
+        uses: otymko/setup-executor@v1.0
         with:
           version: ${{ matrix.version }}
           token: ${{ secrets.DEVELOPER_1C_TOKEN }}
