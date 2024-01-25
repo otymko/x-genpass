@@ -1,0 +1,28 @@
+name: Тестирование
+# Любой пуш и pr в проекте
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macOS-latest]
+        version: [5.0.1-rc-132]
+        
+    steps:
+      # Загрузка проекта
+      - name: Актуализация
+        uses: actions/checkout@v4
+
+      # Установка 1С:Исполнитель конкретной версии
+      - name: Установка 1С:Исполнитель
+        uses: otymko/setup-executor@main
+        with:
+          version: ${{ matrix.version }}
+          token: ${{ secrets.DEVELOPER_1C_TOKEN }}
+          
+      # Задача тестирования, в результате ожидается успешное выполнение
+      - name: Тестирование
+        run: executor ./tests/tests.sbsl
