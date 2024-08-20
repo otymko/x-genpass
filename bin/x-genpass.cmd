@@ -1,3 +1,8 @@
 @echo off
 
-executor.cmd %cd%\..\src\main.xbsl -- "X_EMPTY_ARGS" %*
+if "%1"=="" (
+    executor.cmd %~dp0\..\src\main.sbsl -- "X_EMPTY_ARGS"
+) 
+else (
+    executor.cmd %~dp0\..\src\main.sbsl -- %*   
+)
